@@ -1,7 +1,7 @@
 {
-    "name": "setono/sylius-plugin-skeleton",
+    "name": "setono/sylius-shipping-countdown-plugin",
     "type": "symfony-bundle",
-    "description": "Acme example plugin for Sylius.",
+    "description": "Setono example plugin for Sylius.",
     "keywords": [
         "sylius",
         "sylius-plugin"
@@ -42,12 +42,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Acme\\SyliusExamplePlugin\\": "src/"
+            "Setono\\SyliusShippingCountdownPlugin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+            "Tests\\Setono\\SyliusShippingCountdownPlugin\\": "tests/"
         },
         "classmap": [
             "tests/Application/Kernel.php"
@@ -60,7 +60,7 @@
             "psalm"
         ],
         "check-style": "ecs check src/ tests/",
-        "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Acme_SyliusExamplePlugin_Application_KernelTestDebugContainer.xml ]] || tests/Application/bin/console cache:warmup --env=test",
+        "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Setono_SyliusShippingCountdownPlugin_Application_KernelTestDebugContainer.xml ]] || tests/Application/bin/console cache:warmup --env=test",
         "fix-style": "ecs check src/ tests/ --fix",
         "phpunit": "phpunit"
     }
