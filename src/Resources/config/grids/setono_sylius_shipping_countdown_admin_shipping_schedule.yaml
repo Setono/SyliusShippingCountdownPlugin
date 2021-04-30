@@ -1,0 +1,60 @@
+sylius_grid:
+    grids:
+        setono_sylius_shipping_countdown_admin_shipping_schedule:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%setono_sylius_shipping_countdown.model.shipping_schedule.class%"
+            sorting:
+                priority: desc
+                weekday: asc
+            fields:
+                priority:
+                    type: twig
+                    label: sylius.ui.priority
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/position.html.twig"
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                weekday:
+                    type: twig
+                    label: setono_sylius_shipping_countdown.ui.weekday
+                    sortable: ~
+                    options:
+                        template: "@SetonoSyliusShippingCountdownPlugin/Admin/Grid/Field/weekday.html.twig"
+                shipAt:
+                    type: setono_sylius_shipping_countdown_datetime
+                    label: setono_sylius_shipping_countdown.ui.ship_at
+                    sortable: ~
+                    options:
+                        format: 'H:i'
+                        default: setono_sylius_shipping_countdown.ui.no_shipping
+                startsAt:
+                    type: setono_sylius_shipping_countdown_datetime
+                    label: setono_sylius_shipping_countdown.ui.starts_at
+                    sortable: ~
+                    options:
+                        format: 'Y-m-d'
+                        default: setono_sylius_shipping_countdown.ui.no_starts_at
+                endsAt:
+                    type: setono_sylius_shipping_countdown_datetime
+                    label: setono_sylius_shipping_countdown.ui.ends_at
+                    sortable: ~
+                    options:
+                        format: 'Y-m-d'
+                        default: setono_sylius_shipping_countdown.ui.no_ends_at
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+                bulk:
+                    delete:
+                        type: delete

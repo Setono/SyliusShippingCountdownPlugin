@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Setono\SyliusShippingCountdownPlugin\DependencyInjection;
 
-use Setono\SyliusShippingCountdownPlugin\DependencyInjection\SetonoSyliusShippingCountdownExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Setono\SyliusShippingCountdownPlugin\DependencyInjection\SetonoSyliusShippingCountdownExtension;
+use Setono\SyliusShippingCountdownPlugin\Model\ShippingSchedule;
+use Setono\SyliusShippingCountdownPlugin\Repository\ShippingScheduleRepository;
+use Sylius\Component\Resource\Factory\Factory;
 
-/**
- * See examples of tests and configuration options here: https://github.com/SymfonyTest/SymfonyDependencyInjectionTest
- */
 final class SetonoSyliusShippingCountdownExtensionTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions(): array
@@ -21,9 +21,7 @@ final class SetonoSyliusShippingCountdownExtensionTest extends AbstractExtension
 
     protected function getMinimalConfiguration(): array
     {
-        return [
-            'option' => 'option_value',
-        ];
+        return [];
     }
 
     /**
@@ -33,6 +31,8 @@ final class SetonoSyliusShippingCountdownExtensionTest extends AbstractExtension
     {
         $this->load();
 
-        $this->assertContainerBuilderHasParameter('setono_sylius_shipping_countdown.option', 'option_value');
+        $this->assertContainerBuilderHasParameter('setono_sylius_shipping_countdown.model.shipping_schedule.class', ShippingSchedule::class);
+        $this->assertContainerBuilderHasParameter('setono_sylius_shipping_countdown.repository.shipping_schedule.class', ShippingScheduleRepository::class);
+        $this->assertContainerBuilderHasParameter('setono_sylius_shipping_countdown.factory.shipping_schedule.class', Factory::class);
     }
 }

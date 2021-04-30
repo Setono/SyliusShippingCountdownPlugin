@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Setono\SyliusShippingCountdownPlugin\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-final class SetonoSyliusShippingCountdownExtension extends Extension
+final class SetonoSyliusShippingCountdownExtension extends AbstractResourceExtension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -17,7 +17,8 @@ final class SetonoSyliusShippingCountdownExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $container->setParameter('setono_sylius_shipping_countdown.option', $config['option']);
+        /** @psalm-suppress MixedArgument */
+        $this->registerResources('setono_sylius_shipping_countdown', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
     }

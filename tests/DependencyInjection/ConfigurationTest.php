@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Setono\SyliusShippingCountdownPlugin\DependencyInjection;
 
-use Setono\SyliusShippingCountdownPlugin\DependencyInjection\Configuration;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
+use Setono\SyliusShippingCountdownPlugin\DependencyInjection\Configuration;
+use Setono\SyliusShippingCountdownPlugin\Form\Type\ShippingScheduleType;
+use Setono\SyliusShippingCountdownPlugin\Model\ShippingSchedule;
+use Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface;
+use Setono\SyliusShippingCountdownPlugin\Repository\ShippingScheduleRepository;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 
-/**
- * See examples of tests and configuration options here: https://github.com/SymfonyTest/SymfonyConfigTest
- */
 final class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
@@ -25,24 +29,34 @@ final class ConfigurationTest extends TestCase
      */
     public function values_are_invalid_if_required_value_is_not_provided(): void
     {
-        $this->assertConfigurationIsInvalid(
+        $this->assertConfigurationIsValid(
             [
-                [], // no values at all
+                [],
             ],
-            'The child node "option" at path "setono_sylius_shipping_countdown" must be configured.'
         );
     }
 
     /**
      * @test
      */
-    public function processed_value_contains_required_value(): void
+    public function processed_configuration_for_array_node_1(): void
     {
         $this->assertProcessedConfigurationEquals([
-            ['option' => 'first value'],
-            ['option' => 'last value'],
+            'setono_sylius_shipping_countdown' => [],
         ], [
-            'option' => 'last value',
+            'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
+            'resources' => [
+                'shipping_schedule' => [
+                    'classes' => [
+                        'interface' => ShippingScheduleInterface::class,
+                        'model' => ShippingSchedule::class,
+                        'controller' => ResourceController::class,
+                        'repository' => ShippingScheduleRepository::class,
+                        'factory' => Factory::class,
+                        'form' => ShippingScheduleType::class,
+                    ],
+                ],
+            ],
         ]);
     }
 }

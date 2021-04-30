@@ -1,0 +1,15 @@
+sylius_ui:
+    events:
+        sylius.shop.layout.topbar:
+            blocks:
+                setono_shipping_countdown:
+                    template: "@SetonoSyliusShippingCountdownPlugin/Shop/shippingCountdown.html.twig"
+                    priority: 10
+                    context:
+                        event: sylius.shop.layout.before_security_widget
+
+        sylius.shop.layout.javascripts:
+            blocks:
+                setono_shipping_countdown_scripts:
+                    template: "@SetonoSyliusShippingCountdownPlugin/Shop/_scripts.html.twig"
+                    priority: 10

@@ -1,0 +1,2 @@
+imports:
+    - { resource: '@SetonoSyliusShippingCountdownPlugin/Resources/config/grids/setono_sylius_shipping_countdown_admin_shipping_schedule.yaml' }

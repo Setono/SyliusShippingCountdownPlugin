@@ -1,0 +1,62 @@
+sylius_fixtures:
+    suites:
+        default:
+
+            fixtures:
+
+                default_schedule:
+                    name: setono_sylius_shipping_countdown_shipping_schedule
+                    options:
+                        custom:
+                            default_mon:
+                                code: 'default_mon'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_MONDAY
+                                ship_at: '16:30'
+                            default_tue:
+                                code: 'default_tue'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_TUESDAY
+                                ship_at: '16:30'
+                            default_wed:
+                                code: 'default_wed'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_WEDNESDAY
+                                ship_at: '16:30'
+                            default_thu:
+                                code: 'default_thu'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_THURSDAY
+                                ship_at: '16:30'
+                            default_fri:
+                                code: 'default_fri'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_FRIDAY
+                                ship_at: '16:30'
+
+                overtimes:
+                    name: setono_sylius_shipping_countdown_shipping_schedule
+                    options:
+                        custom:
+                            additional_saturday_shipments_at_may:
+                                code: 'additional_saturday_shipments_at_may'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_SATURDAY
+                                ship_at: '14:00'
+                                starts_at: '2021-05-01'
+                                ends_at: '2021-05-31'
+                                priority: 1
+                            working_more_on_mondays_at_may:
+                                code: 'working_more_on_mondays_at_may'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_MONDAY
+                                ship_at: '17:30'
+                                starts_at: '2021-05-01'
+                                ends_at: '2021-05-31'
+                                priority: 1
+
+                holidays:
+                    name: setono_sylius_shipping_countdown_shipping_schedule
+                    options:
+                        custom:
+                            great_prayer_day:
+                                code: 'great_prayer_day'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_ANY
+                                ship_at: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::NO_SHIPPING
+                                starts_at: '2021-04-30'
+                                ends_at: '2021-04-30'
+                                priority: 2
+

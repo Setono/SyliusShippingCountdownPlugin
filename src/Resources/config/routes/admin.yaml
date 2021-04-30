@@ -1,1 +1,16 @@
-# TODO Add your admin routes here
+setono_sylius_shipping_countdown_admin_shipping_schedule:
+    resource: |
+        alias: setono_sylius_shipping_countdown.shipping_schedule
+        section: admin
+        only: [index, create, update, delete, bulkDelete]
+        templates: "@SyliusAdmin\\Crud"
+        redirect: index
+        grid: setono_sylius_shipping_countdown_admin_shipping_schedule
+        vars:
+            all:
+                subheader: setono_sylius_shipping_countdown.ui.manage_shipping_schedule
+                templates:
+                    form: "@SetonoSyliusShippingCountdownPlugin/Admin/ShippingSchedule/_form.html.twig"
+            index:
+                icon: 'calendar'
+    type: sylius.resource

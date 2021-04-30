@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="setono_sylius_shipping_countdown.form.type.shipping_schedule.validation_groups" type="collection">
+            <parameter>setono_sylius_shipping_countdown</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+
+        <service id="setono_sylius_shipping_countdown.form.type.shipping_schedule"
+                 class="Setono\SyliusShippingCountdownPlugin\Form\Type\ShippingScheduleType">
+            <argument>%setono_sylius_shipping_countdown.model.shipping_schedule.class%</argument>
+            <argument>%setono_sylius_shipping_countdown.form.type.shipping_schedule.validation_groups%</argument>
+
+            <tag name="form.type" />
+        </service>
+
+    </services>
+</container>

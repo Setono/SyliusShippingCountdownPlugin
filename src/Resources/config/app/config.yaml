@@ -1,0 +1,3 @@
+imports:
+    - { resource: '@SetonoSyliusShippingCountdownPlugin/Resources/config/app/grids.yaml' }
+    - { resource: '@SetonoSyliusShippingCountdownPlugin/Resources/config/app/ui.yaml' }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="setono_sylius_shipping_countdown.fixture.example_factory.shipping_schedule"
+                 class="Setono\SyliusShippingCountdownPlugin\Fixture\Factory\ShippingScheduleExampleFactory">
+            <argument type="service" id="setono_sylius_shipping_countdown.factory.shipping_schedule" />
+        </service>
+
+        <service id="setono_sylius_shipping_countdown.fixture.shipping_schedule"
+                 class="Setono\SyliusShippingCountdownPlugin\Fixture\ShippingScheduleFixture">
+            <argument type="service" id="setono_sylius_shipping_countdown.manager.shipping_schedule" />
+            <argument type="service" id="setono_sylius_shipping_countdown.fixture.example_factory.shipping_schedule" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+    </services>
+</container>

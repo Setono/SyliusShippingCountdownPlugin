@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <services>
-        <!-- Put your services here -->
-    </services>
+    <imports>
+        <import resource="services/commands.xml"/>
+        <import resource="services/field_types.xml"/>
+        <import resource="services/fixtures.xml"/>
+        <import resource="services/forms.xml"/>
+        <import resource="services/menus.xml"/>
+        <import resource="services/providers.xml"/>
+        <import resource="services/twig.xml"/>
+    </imports>
 </container>
