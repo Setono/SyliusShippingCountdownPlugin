@@ -1,7 +1,7 @@
 {
     "name": "setono/sylius-shipping-countdown-plugin",
     "type": "symfony-bundle",
-    "description": "Setono example plugin for Sylius.",
+    "description": "Setono shipping countdown plugin for Sylius 1.6+",
     "keywords": [
         "sylius",
         "sylius-plugin"
