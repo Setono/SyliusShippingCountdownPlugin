@@ -71,8 +71,8 @@
         ],
         "check-style": "ecs check src/ tests/",
         "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Setono_SyliusShippingCountdownPlugin_Application_KernelTestDebugContainer.xml ]] || tests/Application/bin/console cache:warmup --env=test",
-        "fixtures": "(cd tests/Application && bin/console sylius:fixtures:load default -n)",
         "fix-style": "ecs check src/ tests/ --fix",
+        "fixtures": "(cd tests/Application && bin/console sylius:fixtures:load default -n)",
         "phpunit": "phpunit"
     }
 }
