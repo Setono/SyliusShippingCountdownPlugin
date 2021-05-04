@@ -15,6 +15,13 @@
     "string",
     "true",
     "void",
+    "Sylius\\Bundle\\CoreBundle\\Fixture\\AbstractResourceFixture",
+    "Sylius\\Bundle\\CoreBundle\\Fixture\\Factory\\AbstractExampleFactory",
+    "Sylius\\Bundle\\CoreBundle\\Fixture\\Factory\\ExampleFactoryInterface",
+    "Sylius\\Bundle\\UiBundle\\Menu\\Event\\MenuBuilderEvent",
+    "Sylius\\Component\\Grid\\DataExtractor\\DataExtractorInterface",
+    "Sylius\\Component\\Grid\\Definition\\Field",
+    "Sylius\\Component\\Grid\\FieldTypes\\FieldTypeInterface",
     "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait"
   ]
 }
