@@ -11,7 +11,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Webmozart\Assert\Assert;
 
 final class DebugScheduleCommand extends Command
 {
@@ -43,7 +42,6 @@ final class DebugScheduleCommand extends Command
         $this->io = new SymfonyStyle($input, $output);
 
         $at = $input->getArgument('at');
-        Assert::string($at);
         $atDateTime = new DateTime($at);
 
         $this->io->writeln(sprintf(
