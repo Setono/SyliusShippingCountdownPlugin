@@ -24,6 +24,9 @@ $ composer require setono/sylius-shipping-countdown-plugin
 # config/packages/setono_sylius_shipping_countdown.yaml
 imports:
     - { resource: "@SetonoSyliusShippingCountdownPlugin/Resources/config/app/config.yaml" }
+
+    # Uncomment next line if you're using Webpack Encore
+    # - { resource: "@SetonoSyliusShippingCountdownPlugin/Resources/config/app/config_webpack.yaml" }
     
     # You can also import example fixtures to play
     # - { resource: "@SetonoSyliusShippingCountdownPlugin/Resources/config/app/fixtures.yaml" }
