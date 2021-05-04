@@ -10,6 +10,8 @@
 
 ![Screenshot showing shipping schedule index at admin](docs/images/admin-shipping-schedule-index.png)
 
+![Screenshot showing shipping countdown at shop header](docs/images/shop-index-header.png)
+
 ## Installation
 
 ### Require plugin with composer:
