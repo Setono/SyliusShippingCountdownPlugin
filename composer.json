@@ -72,6 +72,7 @@
     "scripts": {
         "analyse": [
             "@ensure-test-container-exists",
+            "psalm --clear-global-cache",
             "psalm"
         ],
         "check-style": "ecs check src/ tests/",
