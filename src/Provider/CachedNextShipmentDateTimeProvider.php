@@ -43,7 +43,7 @@ final class CachedNextShipmentDateTimeProvider implements NextShipmentDateTimePr
                 // If we don't have a schedule - cache for 1 hour
                 // So new schedule will be visible in 1 hour
                 // after it was added via admin
-                $cacheItem->expiresAfter(3600); // @todo FIX to 3600
+                $cacheItem->expiresAfter(3600);
             }
 
             $this->cache->save($cacheItem);
