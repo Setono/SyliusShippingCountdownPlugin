@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Setono\SyliusShippingCountdownPlugin\Model;
 
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Channel\Model\ChannelInterface;
 
 class ShippingSchedule implements ShippingScheduleInterface
 {
@@ -20,7 +23,15 @@ class ShippingSchedule implements ShippingScheduleInterface
 
     private ?DateTimeInterface $endsAt = null;
 
+    /** @psalm-var Collection<array-key, ChannelInterface> */
+    protected Collection $channels;
+
     protected int $priority = 0;
+
+    public function __construct()
+    {
+        $this->channels = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +86,34 @@ class ShippingSchedule implements ShippingScheduleInterface
     public function setEndsAt(?DateTimeInterface $endsAt): void
     {
         $this->endsAt = $endsAt;
+    }
+
+    /**
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
+     */
+    public function getChannels(): Collection
+    {
+        return $this->channels;
+    }
+
+    public function addChannel(ChannelInterface $channel): void
+    {
+        if (!$this->hasChannel($channel)) {
+            $this->channels->add($channel);
+        }
+    }
+
+    public function removeChannel(ChannelInterface $channel): void
+    {
+        if ($this->hasChannel($channel)) {
+            $this->channels->removeElement($channel);
+        }
+    }
+
+    public function hasChannel(ChannelInterface $channel): bool
+    {
+        return $this->channels->contains($channel);
     }
 
     public function getPriority(): int

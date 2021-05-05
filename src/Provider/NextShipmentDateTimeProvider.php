@@ -8,6 +8,7 @@ use DateTimeInterface;
 use Safe\DateTime;
 use Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface;
 use Setono\SyliusShippingCountdownPlugin\Repository\ShippingScheduleRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 final class NextShipmentDateTimeProvider implements NextShipmentDateTimeProviderInterface
 {
@@ -18,7 +19,7 @@ final class NextShipmentDateTimeProvider implements NextShipmentDateTimeProvider
         $this->repository = $repository;
     }
 
-    public function getNextShipmentDateTime(DateTimeInterface $at = null, int $searchDaysLimit = 10): ?DateTimeInterface
+    public function getNextShipmentDateTime(ChannelInterface $channel, DateTimeInterface $at = null, int $searchDaysLimit = 10): ?DateTimeInterface
     {
         if ($searchDaysLimit-- <= 0) {
             return null;
@@ -28,10 +29,11 @@ final class NextShipmentDateTimeProvider implements NextShipmentDateTimeProvider
             $at = new DateTime('now');
         }
 
-        $schedule = $this->repository->findForDate($at);
+        $schedule = $this->repository->findForChannelAndDate($channel, $at);
         if (null === $schedule || ShippingScheduleInterface::NO_SHIPPING === $schedule->getShipAt()) {
             // If there are no shipping at this day - check next day at loop
             return $this->getNextShipmentDateTime(
+                $channel,
                 $this->getNextDayDateFromDateTime($at),
                 $searchDaysLimit
             );
@@ -43,6 +45,7 @@ final class NextShipmentDateTimeProvider implements NextShipmentDateTimeProvider
             // If today's shipping already was performed - search
             // next shipment date starting from tomorrow's 00:00:00
             return $this->getNextShipmentDateTime(
+                $channel,
                 $this->getNextDayDateFromDateTime($at),
                 $searchDaysLimit
             );

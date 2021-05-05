@@ -32,6 +32,14 @@ sylius_grid:
                     options:
                         format: 'H:i'
                         default: setono_sylius_shipping_countdown.ui.no_shipping
+                channels:
+                    type: twig
+                    label: setono_sylius_shipping_countdown.ui.channels
+                    sortable: channel.code
+                    options:
+                        template: "@SetonoSyliusShippingCountdownPlugin/Admin/Grid/Field/arrayCollection.html.twig"
+                        vars:
+                             itemTemplate: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
                 startsAt:
                     type: setono_sylius_shipping_countdown_datetime
                     label: setono_sylius_shipping_countdown.ui.starts_at
@@ -46,6 +54,14 @@ sylius_grid:
                     options:
                         format: 'Y-m-d'
                         default: setono_sylius_shipping_countdown.ui.no_ends_at
+            filters:
+                channel:
+                    type: entities
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        field: "channels.id"
             actions:
                 main:
                     create:

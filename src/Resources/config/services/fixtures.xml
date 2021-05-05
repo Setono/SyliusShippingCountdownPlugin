@@ -7,6 +7,7 @@
 
         <service id="setono_sylius_shipping_countdown.fixture.example_factory.shipping_schedule"
                  class="Setono\SyliusShippingCountdownPlugin\Fixture\Factory\ShippingScheduleExampleFactory">
+            <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="setono_sylius_shipping_countdown.factory.shipping_schedule" />
         </service>
 

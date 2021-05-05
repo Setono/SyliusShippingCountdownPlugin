@@ -9,13 +9,19 @@ use Safe\DateTime;
 use Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
 /* not final */ class ShippingScheduleExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
+    /** @var RepositoryInterface */
+    protected $channelRepository;
+
     /** @var FactoryInterface */
     protected $shippingScheduleFactory;
 
@@ -26,8 +32,10 @@ use Webmozart\Assert\Assert;
     protected $optionsResolver;
 
     public function __construct(
+        RepositoryInterface $channelRepository,
         FactoryInterface $shippingScheduleFactory
     ) {
+        $this->channelRepository = $channelRepository;
         $this->shippingScheduleFactory = $shippingScheduleFactory;
 
         $this->faker = \Faker\Factory::create();
@@ -64,10 +72,20 @@ use Webmozart\Assert\Assert;
             $shippingSchedule->setEndsAt($options['ends_at']);
         }
 
+        $this->createRelations($shippingSchedule, $options);
+
         /** @psalm-suppress MixedArgument */
         $shippingSchedule->setPriority($options['priority']);
 
         return $shippingSchedule;
+    }
+
+    private function createRelations(ShippingScheduleInterface $shippingSchedule, array $options): void
+    {
+        /** @var ChannelInterface $channel */
+        foreach ($options['channels'] as $channel) {
+            $shippingSchedule->addChannel($channel);
+        }
     }
 
     protected function configureOptions(OptionsResolver $resolver): void
@@ -100,6 +118,10 @@ use Webmozart\Assert\Assert;
             ->setDefault('ends_at', null)
             ->setAllowedTypes('ends_at', ['null', 'string', DateTimeInterface::class])
             ->setNormalizer('ends_at', $this->getDateTimeNormalizer())
+
+            ->setDefault('channels', LazyOption::randomOnes($this->channelRepository, 1))
+            ->setAllowedTypes('channels', 'array')
+            ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
 
             ->setDefault('priority', 0)
             ->setAllowedTypes('priority', ['int'])

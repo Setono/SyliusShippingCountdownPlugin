@@ -6,11 +6,15 @@ namespace Setono\SyliusShippingCountdownPlugin\Command;
 
 use Safe\DateTime;
 use Setono\SyliusShippingCountdownPlugin\Provider\NextShipmentDateTimeProviderInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Webmozart\Assert\Assert;
 
 final class DebugScheduleCommand extends Command
 {
@@ -18,13 +22,18 @@ final class DebugScheduleCommand extends Command
 
     private const DATETIME_FORMAT = 'D, Y-m-d H:i:s P';
 
+    private ChannelRepositoryInterface $channelRepository;
+
     private NextShipmentDateTimeProviderInterface $provider;
 
     /** @psalm-suppress PropertyNotSetInConstructor */
     private SymfonyStyle $io;
 
-    public function __construct(NextShipmentDateTimeProviderInterface $provider)
-    {
+    public function __construct(
+        ChannelRepositoryInterface $channelRepository,
+        NextShipmentDateTimeProviderInterface $provider
+    ) {
+        $this->channelRepository = $channelRepository;
         $this->provider = $provider;
 
         parent::__construct();
@@ -34,6 +43,7 @@ final class DebugScheduleCommand extends Command
     {
         $this
             ->addArgument('at', InputArgument::OPTIONAL, 'At which datetime?', 'now')
+            ->addArgument('channel', InputArgument::OPTIONAL, 'For what channel?', null)
         ;
     }
 
@@ -41,6 +51,20 @@ final class DebugScheduleCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
 
+        $channels = [];
+        /** @var string|null $channelCode */
+        $channelCode = $input->getArgument('channel');
+        if (null === $channelCode) {
+            /** @var ChannelInterface[] $channels */
+            $channels = $this->channelRepository->findAll();
+        } else {
+            /** @var ChannelInterface|null $channel */
+            $channel = $this->channelRepository->findOneByCode($channelCode);
+            Assert::notNull($channel, sprintf('Channel %s was not found', $channelCode));
+            $channels[] = $channel;
+        }
+
+        /** @var string $at */
         $at = $input->getArgument('at');
         $atDateTime = new DateTime($at);
 
@@ -49,17 +73,28 @@ final class DebugScheduleCommand extends Command
             $atDateTime->format(self::DATETIME_FORMAT)
         ));
 
-        $nextShipmentDateTime = $this->provider->getNextShipmentDateTime($atDateTime);
-        if (null === $nextShipmentDateTime) {
-            $this->io->writeln('<error>Next shipment date/time was not found</error>');
+        $table = new Table($this->io);
+        $table->setHeaders([
+            'Channel',
+            'Next shipment at',
+        ]);
 
-            return 1;
+        foreach ($channels as $channel) {
+            $nextShipmentDateTime = $this->provider->getNextShipmentDateTime($channel, $atDateTime);
+            if (null === $nextShipmentDateTime) {
+                $table->addRow([
+                    $channel->getCode(),
+                    '<error>Not found</error>',
+                ]);
+            } else {
+                $table->addRow([
+                    $channel->getCode(),
+                    $nextShipmentDateTime->format(self::DATETIME_FORMAT),
+                ]);
+            }
         }
 
-        $this->io->writeln(sprintf(
-            'Next shipment date/time is: <info>%s</info>',
-            $nextShipmentDateTime->format(self::DATETIME_FORMAT)
-        ));
+        $table->render();
 
         return 0;
     }

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Setono\SyliusShippingCountdownPlugin\Model;
 
 use DateTimeInterface;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -43,6 +45,18 @@ interface ShippingScheduleInterface extends ResourceInterface, CodeAwareInterfac
     public function getEndsAt(): ?DateTimeInterface;
 
     public function setEndsAt(?DateTimeInterface $endsAt): void;
+
+    /**
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
+     */
+    public function getChannels(): Collection;
+
+    public function addChannel(ChannelInterface $channel): void;
+
+    public function removeChannel(ChannelInterface $channel): void;
+
+    public function hasChannel(ChannelInterface $channel): bool;
 
     public function getPriority(): int;
 

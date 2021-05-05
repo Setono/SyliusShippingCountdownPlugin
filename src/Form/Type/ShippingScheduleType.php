@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\SyliusShippingCountdownPlugin\Form\Type;
 
 use Setono\SyliusShippingCountdownPlugin\Model\ShippingSchedule;
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,6 +20,11 @@ final class ShippingScheduleType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
+            ->add('channels', ChannelChoiceType::class, [
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'setono_sylius_shipping_countdown.form.shipping_schedule.channels',
+            ])
             ->add('weekday', ChoiceType::class, [
                 'label' => 'setono_sylius_shipping_countdown.form.shipping_schedule.weekday',
                 'help' => 'setono_sylius_shipping_countdown.form.shipping_schedule.weekday_help',

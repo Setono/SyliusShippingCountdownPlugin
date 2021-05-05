@@ -6,6 +6,7 @@ namespace Setono\SyliusShippingCountdownPlugin\Twig;
 
 use DateTimeInterface;
 use Setono\SyliusShippingCountdownPlugin\Provider\NextShipmentDateTimeProviderInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -21,11 +22,11 @@ final class ShippingCountdownExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('setono_shipping_countdown_next_shipment_date', function (): ?DateTimeInterface {
-                return $this->nextShipmentDateTimeProvider->getNextShipmentDateTime();
+            new TwigFunction('setono_shipping_countdown_next_shipment_date', function (ChannelInterface $channel): ?DateTimeInterface {
+                return $this->nextShipmentDateTimeProvider->getNextShipmentDateTime($channel);
             }),
-            new TwigFunction('setono_shipping_countdown_next_shipment_date_rfc2822', function (): ?string {
-                $nextShipmentDateTime = $this->nextShipmentDateTimeProvider->getNextShipmentDateTime();
+            new TwigFunction('setono_shipping_countdown_next_shipment_date_rfc2822', function (ChannelInterface $channel): ?string {
+                $nextShipmentDateTime = $this->nextShipmentDateTimeProvider->getNextShipmentDateTime($channel);
                 if (null === $nextShipmentDateTime) {
                     return null;
                 }

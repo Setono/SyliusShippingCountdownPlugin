@@ -7,6 +7,7 @@
 
         <service id="setono_sylius_shipping_countdown.command.debug"
                  class="Setono\SyliusShippingCountdownPlugin\Command\DebugScheduleCommand">
+            <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="setono_sylius_shipping_countdown.provider.next_shipment" />
 
             <tag name="console.command" />

@@ -6,9 +6,10 @@ namespace Setono\SyliusShippingCountdownPlugin\Repository;
 
 use DateTimeInterface;
 use Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ShippingScheduleRepositoryInterface extends RepositoryInterface
 {
-    public function findForDate(DateTimeInterface $date): ?ShippingScheduleInterface;
+    public function findForChannelAndDate(ChannelInterface $channel, DateTimeInterface $date): ?ShippingScheduleInterface;
 }

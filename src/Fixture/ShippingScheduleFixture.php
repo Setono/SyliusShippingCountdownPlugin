@@ -22,6 +22,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
         $node->scalarNode('ship_at')->defaultNull();
         $node->scalarNode('starts_at')->defaultNull();
         $node->scalarNode('ends_at')->defaultNull();
+        $node->arrayNode('channels')->scalarPrototype();
         $node->integerNode('priority')->defaultValue(0);
     }
 }

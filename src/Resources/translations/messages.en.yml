@@ -19,6 +19,7 @@ setono_sylius_shipping_countdown:
             friday: Friday
             saturday: Saturday
             sunday: Sunday
+        channels: Channels
         ship_at: Ship time
         no_shipping: No shipping
         starts_at: Starts at
@@ -41,5 +42,5 @@ setono_sylius_shipping_countdown:
             starts_at_help: Apply Ship time to days since given or leave empty
             ends_at: Ends at
             ends_at_help: Apply Ship time to days prior to given or leave empty
-            priority: Priority 
-            
+            channels: Channels
+            priority: Priority
