@@ -52,7 +52,11 @@ final class DebugScheduleCommand extends Command
         $this->io = new SymfonyStyle($input, $output);
 
         $channels = [];
-        /** @var string|null $channelCode */
+        /**
+         * @psalm-suppress UnnecessaryVarAnnotation
+         *
+         * @var string|null $channelCode
+         */
         $channelCode = $input->getArgument('channel');
         if (null === $channelCode) {
             /** @var ChannelInterface[] $channels */
@@ -64,7 +68,11 @@ final class DebugScheduleCommand extends Command
             $channels[] = $channel;
         }
 
-        /** @var string $at */
+        /**
+         * @psalm-suppress UnnecessaryVarAnnotation
+         *
+         * @var string $at
+         */
         $at = $input->getArgument('at');
         $atDateTime = new DateTime($at);
 
