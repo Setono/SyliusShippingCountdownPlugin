@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Setono\SyliusShippingCountdownPlugin\Provider;
 
 use DateTimeInterface;
-use Psr\Cache\CacheItemPoolInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Webmozart\Assert\Assert;
 
 final class CachedNextShipmentDateTimeProvider implements NextShipmentDateTimeProviderInterface
 {
     private NextShipmentDateTimeProviderInterface $decorated;
 
-    private CacheItemPoolInterface $cache;
+    private AdapterInterface $cache;
 
     public function __construct(
         NextShipmentDateTimeProviderInterface $decorated,
-        CacheItemPoolInterface $cache
+        AdapterInterface $cache
     ) {
         $this->decorated = $decorated;
         $this->cache = $cache;
