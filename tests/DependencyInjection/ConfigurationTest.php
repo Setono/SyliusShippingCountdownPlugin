@@ -45,6 +45,10 @@ final class ConfigurationTest extends TestCase
             'setono_sylius_shipping_countdown' => [],
         ], [
             'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
+            'cache' => [
+                'enabled' => false,
+                'pool' => null,
+            ],
             'resources' => [
                 'shipping_schedule' => [
                     'classes' => [
