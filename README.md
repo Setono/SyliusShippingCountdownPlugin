@@ -32,6 +32,18 @@ imports:
     
     # You can also import example fixtures to play
     # - { resource: "@SetonoSyliusShippingCountdownPlugin/Resources/config/app/fixtures.yaml" }
+
+# If you want to use caching - add next configuration:
+framework:
+    cache:
+        pools:
+            app.shipping_countdown_cache_pool:
+                adapter: cache.app
+
+setono_sylius_shipping_countdown:
+    cache:
+        pool: app.shipping_countdown_cache_pool
+        enabled: true
 ```
 
 ### Import routing:

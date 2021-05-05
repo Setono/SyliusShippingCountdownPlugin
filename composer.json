@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "doctrine/collections": "^1.0",
         "fakerphp/faker": "^1.9",
         "knplabs/knp-menu": "^3.1",
         "sylius/resource-bundle": "^1.6",
@@ -34,6 +35,7 @@
         "roave/security-advisories": "dev-latest",
         "setono/code-quality-pack": "^1.5.2",
         "sylius/sylius": "^1.9",
+        "symfony/cache": "^4.4 || ^5.0",
         "symfony/debug-bundle": "^5.1",
         "symfony/dotenv": "^5.2",
         "symfony/intl": "^4.4 || ^5.0",
@@ -41,6 +43,9 @@
         "symfony/property-info": "^4.4 || ^5.0",
         "symfony/serializer": "^4.4 || ^5.0",
         "symfony/web-profiler-bundle": "^5.0"
+    },
+    "suggest": {
+        "symfony/cache": "To cache results"
     },
     "config": {
         "sort-packages": true
