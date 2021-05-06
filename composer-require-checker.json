@@ -24,9 +24,11 @@
     "Sylius\\Component\\Channel\\Model\\ChannelInterface",
     "Sylius\\Component\\Channel\\Repository\\ChannelRepositoryInterface",
     "Sylius\\Component\\Core\\Model\\ChannelInterface",
+    "Sylius\\Component\\Grid\\Data\\DataSourceInterface",
     "Sylius\\Component\\Grid\\DataExtractor\\DataExtractorInterface",
     "Sylius\\Component\\Grid\\Definition\\Field",
     "Sylius\\Component\\Grid\\FieldTypes\\FieldTypeInterface",
+    "Sylius\\Component\\Grid\\Filtering\\FilterInterface",
     "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait",
     "Symfony\\Component\\Cache\\Adapter\\AdapterInterface"
   ]
