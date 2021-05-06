@@ -4,6 +4,40 @@ sylius_fixtures:
 
             fixtures:
 
+                channel:
+                    options:
+                        custom:
+                            de_web_store:
+                                name: 'DE Web Store'
+                                code: 'DE_WEB'
+                                locales:
+                                    - 'de_DE'
+                                currencies:
+                                    - 'EUR'
+                                enabled: true
+                                hostname: 'de.%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%'
+                                theme_name: '%env(resolve:SYLIUS_FIXTURES_THEME_NAME)%'
+
+                payment_method:
+                    options:
+                        custom:
+                            de_bank:
+                                code: 'de_bank'
+                                name: 'DE bank'
+                                channels:
+                                    - 'DE_WEB'
+                                enabled: true
+
+                shipping_method:
+                    options:
+                        custom:
+                            de_delivery:
+                                code: 'de_delivery'
+                                name: 'DE delivery'
+                                channels:
+                                    - 'DE_WEB'
+                                enabled: true
+
                 default_schedule:
                     name: setono_sylius_shipping_countdown_shipping_schedule
                     options:
@@ -12,23 +46,46 @@ sylius_fixtures:
                                 code: 'default_mon'
                                 weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_MONDAY
                                 ship_at: '16:30'
+                                channels:
+                                    - 'FASHION_WEB'
                             default_tue:
                                 code: 'default_tue'
                                 weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_TUESDAY
                                 ship_at: '16:30'
+                                channels:
+                                    - 'FASHION_WEB'
                             default_wed:
                                 code: 'default_wed'
                                 weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_WEDNESDAY
                                 ship_at: '16:30'
+                                channels:
+                                    - 'FASHION_WEB'
                             default_thu:
                                 code: 'default_thu'
                                 weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_THURSDAY
                                 ship_at: '16:30'
+                                channels:
+                                    - 'FASHION_WEB'
                             default_fri:
                                 code: 'default_fri'
                                 weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_FRIDAY
                                 ship_at: '16:30'
-
+                                channels:
+                                    - 'FASHION_WEB'
+                            
+                            # DE
+                            de_tue:
+                                code: 'de_tue'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_TUESDAY
+                                ship_at: '12:00'
+                                channels:
+                                    - 'DE_WEB'
+                            de_fri:
+                                code: 'de_fri'
+                                weekday: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::WEEKDAY_FRIDAY
+                                ship_at: '12:00'
+                                channels:
+                                    - 'DE_WEB'
                 overtimes:
                     name: setono_sylius_shipping_countdown_shipping_schedule
                     options:
@@ -39,6 +96,8 @@ sylius_fixtures:
                                 ship_at: '14:00'
                                 starts_at: '2021-05-01'
                                 ends_at: '2021-05-31'
+                                channels:
+                                    - 'FASHION_WEB'
                                 priority: 1
                             working_more_on_mondays_at_may:
                                 code: 'working_more_on_mondays_at_may'
@@ -46,6 +105,8 @@ sylius_fixtures:
                                 ship_at: '17:30'
                                 starts_at: '2021-05-01'
                                 ends_at: '2021-05-31'
+                                channels:
+                                    - 'FASHION_WEB'
                                 priority: 1
 
                 holidays:
@@ -58,5 +119,8 @@ sylius_fixtures:
                                 ship_at: !php/const Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface::NO_SHIPPING
                                 starts_at: '2021-04-30'
                                 ends_at: '2021-04-30'
+                                channels:
+                                    - 'FASHION_WEB'
+                                    - 'DE_WEB'
                                 priority: 2
 

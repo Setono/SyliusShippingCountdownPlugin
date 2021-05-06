@@ -15,13 +15,21 @@
     "string",
     "true",
     "void",
+    "Sylius\\Bundle\\ChannelBundle\\Form\\Type\\ChannelChoiceType",
     "Sylius\\Bundle\\CoreBundle\\Fixture\\AbstractResourceFixture",
     "Sylius\\Bundle\\CoreBundle\\Fixture\\Factory\\AbstractExampleFactory",
     "Sylius\\Bundle\\CoreBundle\\Fixture\\Factory\\ExampleFactoryInterface",
+    "Sylius\\Bundle\\CoreBundle\\Fixture\\OptionsResolver\\LazyOption",
     "Sylius\\Bundle\\UiBundle\\Menu\\Event\\MenuBuilderEvent",
+    "Sylius\\Component\\Channel\\Model\\ChannelInterface",
+    "Sylius\\Component\\Channel\\Repository\\ChannelRepositoryInterface",
+    "Sylius\\Component\\Core\\Model\\ChannelInterface",
+    "Sylius\\Component\\Grid\\Data\\DataSourceInterface",
     "Sylius\\Component\\Grid\\DataExtractor\\DataExtractorInterface",
     "Sylius\\Component\\Grid\\Definition\\Field",
     "Sylius\\Component\\Grid\\FieldTypes\\FieldTypeInterface",
-    "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait"
+    "Sylius\\Component\\Grid\\Filtering\\FilterInterface",
+    "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait",
+    "Symfony\\Component\\Cache\\Adapter\\AdapterInterface"
   ]
 }

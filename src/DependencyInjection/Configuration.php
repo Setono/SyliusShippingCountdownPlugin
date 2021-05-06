@@ -27,6 +27,11 @@ final class Configuration implements ConfigurationInterface
         $node = $rootNode->addDefaultsIfNotSet()->children();
         $node->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
 
+        // Cache
+        $cacheNode = $node->arrayNode('cache')->addDefaultsIfNotSet()->children();
+        $cacheNode->booleanNode('enabled')->defaultFalse();
+        $cacheNode->scalarNode('pool')->defaultNull();
+
         $this->addResourcesSection($rootNode);
 
         return $treeBuilder;

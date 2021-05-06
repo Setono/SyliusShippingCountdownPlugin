@@ -1,3 +1,14 @@
 imports:
     - { resource: '@SetonoSyliusShippingCountdownPlugin/Resources/config/app/config.yaml' }
     - { resource: '@SetonoSyliusShippingCountdownPlugin/Resources/config/app/fixtures.yaml' }
+
+framework:
+    cache:
+        pools:
+            app.shipping_countdown_cache_pool:
+                adapter: cache.app
+
+setono_sylius_shipping_countdown:
+    cache:
+        pool: app.shipping_countdown_cache_pool
+        enabled: true
