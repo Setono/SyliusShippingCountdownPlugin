@@ -7,7 +7,8 @@
 
         <service id="setono_sylius_shipping_countdown.provider.next_shipment.cached"
                  class="Setono\SyliusShippingCountdownPlugin\Provider\CachedNextShipmentDateTimeProvider"
-                 decorates="setono_sylius_shipping_countdown.provider.next_shipment">
+                 decorates="setono_sylius_shipping_countdown.provider.next_shipment"
+                 decoration-priority="256">
             <argument type="service" id="setono_sylius_shipping_countdown.provider.next_shipment.cached.inner" />
             <argument type="service" id="setono_sylius_shipping_countdown.cache" />
         </service>
