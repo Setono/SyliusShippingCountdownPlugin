@@ -1,2 +1,7 @@
 imports:
     - { resource: '@SetonoSyliusShippingCountdownPlugin/Resources/config/grids/setono_sylius_shipping_countdown_admin_shipping_schedule.yaml' }
+
+sylius_grid:
+     templates:
+         filter:
+             setono_sylius_shipping_countdown_entities: '@SetonoSyliusShippingCountdownPlugin/Admin/Grid/Filter/setono_sylius_shipping_countdown_entities.html.twig'

@@ -56,7 +56,10 @@ sylius_grid:
                         default: setono_sylius_shipping_countdown.ui.no_ends_at
             filters:
                 channel:
-                    type: entities
+                    # Using copy of entities type, as it available only since v1.8.0
+                    # @see https://github.com/Sylius/Sylius/pull/11442
+                    # @see https://github.com/Sylius/Sylius/commit/b4d26771c30862b7e5845ffab1900d01e552419a
+                    type: setono_sylius_shipping_countdown_entities
                     label: sylius.ui.channel
                     form_options:
                         class: "%sylius.model.channel.class%"
