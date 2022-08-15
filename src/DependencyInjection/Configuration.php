@@ -21,7 +21,6 @@ final class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('setono_sylius_shipping_countdown');
 
-        /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
         $node = $rootNode->addDefaultsIfNotSet()->children();
