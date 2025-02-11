@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Setono\SyliusShippingCountdownPlugin\Fixture\Factory;
 
 use DateTimeInterface;
-use Safe\DateTime;
 use Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -145,7 +144,7 @@ use Webmozart\Assert\Assert;
 
             Assert::string($previousValue);
 
-            return new DateTime($previousValue);
+            return new \DateTime($previousValue);
         };
     }
 }

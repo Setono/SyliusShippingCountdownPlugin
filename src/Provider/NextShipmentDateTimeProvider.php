@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Setono\SyliusShippingCountdownPlugin\Provider;
 
 use DateTimeInterface;
-use Safe\DateTime;
 use Setono\SyliusShippingCountdownPlugin\Model\ShippingScheduleInterface;
 use Setono\SyliusShippingCountdownPlugin\Repository\ShippingScheduleRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -26,7 +25,7 @@ final class NextShipmentDateTimeProvider implements NextShipmentDateTimeProvider
         }
 
         if (null === $at) {
-            $at = new DateTime('now');
+            $at = new \DateTime('now');
         }
 
         $schedule = $this->repository->findForChannelAndDate($channel, $at);
@@ -61,13 +60,13 @@ final class NextShipmentDateTimeProvider implements NextShipmentDateTimeProvider
             $time->format('H:i')
         ));
 
-        return DateTime::createFromFormat('Y-m-d H:i', $dateTimeString);
+        return \DateTime::createFromFormat('Y-m-d H:i', $dateTimeString);
     }
 
     private function getNextDayDateFromDateTime(DateTimeInterface $datetime): DateTimeInterface
     {
         $dateString = $datetime->format('Y-m-d 24:00:00');
 
-        return DateTime::createFromFormat('Y-m-d H:i:s', $dateString);
+        return \DateTime::createFromFormat('Y-m-d H:i:s', $dateString);
     }
 }

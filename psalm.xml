@@ -10,9 +10,4 @@
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
-    <plugins>
-        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
-            <containerXml>tests/Application/var/cache/test/ApplicationTests_Setono_SyliusShippingCountdownPlugin_Application_KernelTestDebugContainer.xml</containerXml>
-        </pluginClass>
-    </plugins>
 </psalm>

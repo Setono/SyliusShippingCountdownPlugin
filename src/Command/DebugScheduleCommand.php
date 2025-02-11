@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusShippingCountdownPlugin\Command;
 
-use Safe\DateTime;
 use Setono\SyliusShippingCountdownPlugin\Provider\NextShipmentDateTimeProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -64,7 +63,7 @@ final class DebugScheduleCommand extends Command
         }
 
         $at = $input->getArgument('at');
-        $atDateTime = new DateTime($at);
+        $atDateTime = new \DateTime($at);
 
         $this->io->writeln(sprintf(
             'Searching shipment date for %s...',
